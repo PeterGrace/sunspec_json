@@ -1,0 +1,805 @@
+{
+  "group": {
+    "name": "lithium_ion_string",
+    "type": "group",
+    "label": "Lithium-Ion String Model",
+    "points": [
+      {
+        "name": "ID",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "static": "S",
+        "label": "Model ID",
+        "desc": "Model identifier",
+        "value": 804
+      },
+      {
+        "name": "L",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "static": "S",
+        "label": "Model Length",
+        "desc": "Model length"
+      },
+      {
+        "name": "Idx",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "label": "String Index",
+        "desc": "Index of the string within the bank."
+      },
+      {
+        "name": "NMod",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Module Count",
+        "desc": "Count of modules in the string."
+      },
+      {
+        "name": "St",
+        "type": "bitfield32",
+        "size": 2,
+        "mandatory": "M",
+        "label": "String Status",
+        "desc": "Current status of the string.",
+        "symbols": [
+          {
+            "name": "STRING_ENABLED",
+            "value": 0
+          },
+          {
+            "name": "CONTACTOR_STATUS",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "name": "ConFail",
+        "type": "enum16",
+        "size": 1,
+        "label": "Connection Failure Reason",
+        "symbols": [
+          {
+            "name": "NO_FAILURE",
+            "value": 0
+          },
+          {
+            "name": "BUTTON_PUSHED",
+            "value": 1
+          },
+          {
+            "name": "STR_GROUND_FAULT",
+            "value": 2
+          },
+          {
+            "name": "OUTSIDE_VOLTAGE_RANGE",
+            "value": 3
+          },
+          {
+            "name": "STRING_NOT_ENABLED",
+            "value": 4
+          },
+          {
+            "name": "FUSE_OPEN",
+            "value": 5
+          },
+          {
+            "name": "CONTACTOR_FAILURE",
+            "value": 6
+          },
+          {
+            "name": "PRECHARGE_FAILURE",
+            "value": 7
+          },
+          {
+            "name": "STRING_FAULT",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "name": "NCellBal",
+        "type": "uint16",
+        "size": 1,
+        "label": "String Cell Balancing Count",
+        "desc": "Number of cells currently being balanced in the string."
+      },
+      {
+        "name": "SoC",
+        "type": "uint16",
+        "size": 1,
+        "sf": "SoC_SF",
+        "units": "%",
+        "mandatory": "M",
+        "label": "String State of Charge",
+        "desc": "Battery string state of charge, expressed as a percentage."
+      },
+      {
+        "name": "DoD",
+        "type": "uint16",
+        "size": 1,
+        "sf": "DoD_SF",
+        "units": "%",
+        "label": "String Depth of Discharge",
+        "desc": "Depth of discharge for the string, expressed as a percentage."
+      },
+      {
+        "name": "NCyc",
+        "type": "uint32",
+        "size": 2,
+        "label": "String Cycle Count",
+        "desc": "Number of discharge cycles executed upon the string."
+      },
+      {
+        "name": "SoH",
+        "type": "uint16",
+        "size": 1,
+        "sf": "SoH_SF",
+        "units": "%",
+        "label": "String State of Health",
+        "desc": "Battery string state of health, expressed as a percentage."
+      },
+      {
+        "name": "A",
+        "type": "int16",
+        "size": 1,
+        "sf": "A_SF",
+        "units": "A",
+        "mandatory": "M",
+        "label": "String Current",
+        "desc": "String current measurement."
+      },
+      {
+        "name": "V",
+        "type": "uint16",
+        "size": 1,
+        "sf": "V_SF",
+        "units": "V",
+        "label": "String Voltage",
+        "desc": "String voltage measurement."
+      },
+      {
+        "name": "CellVMax",
+        "type": "uint16",
+        "size": 1,
+        "sf": "CellV_SF",
+        "units": "V",
+        "mandatory": "M",
+        "label": "Max Cell Voltage",
+        "desc": "Maximum voltage for all cells in the string."
+      },
+      {
+        "name": "CellVMaxMod",
+        "type": "uint16",
+        "size": 1,
+        "label": "Max Cell Voltage Module",
+        "desc": "Module containing the cell with maximum cell voltage."
+      },
+      {
+        "name": "CellVMin",
+        "type": "uint16",
+        "size": 1,
+        "sf": "CellV_SF",
+        "units": "V",
+        "mandatory": "M",
+        "label": "Min Cell Voltage",
+        "desc": "Minimum voltage for all cells in the string."
+      },
+      {
+        "name": "CellVMinMod",
+        "type": "uint16",
+        "size": 1,
+        "label": "Min Cell Voltage Module",
+        "desc": "Module containing the cell with minimum cell voltage."
+      },
+      {
+        "name": "CellVAvg",
+        "type": "uint16",
+        "size": 1,
+        "sf": "CellV_SF",
+        "units": "V",
+        "mandatory": "M",
+        "label": "Average Cell Voltage",
+        "desc": "Average voltage for all cells in the string."
+      },
+      {
+        "name": "ModTmpMax",
+        "type": "int16",
+        "size": 1,
+        "sf": "ModTmp_SF",
+        "units": "C",
+        "mandatory": "M",
+        "label": "Max Module Temperature",
+        "desc": "Maximum temperature for all modules in the string."
+      },
+      {
+        "name": "ModTmpMaxMod",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Max Module Temperature Module",
+        "desc": "Module with the maximum temperature."
+      },
+      {
+        "name": "ModTmpMin",
+        "type": "int16",
+        "size": 1,
+        "sf": "ModTmp_SF",
+        "units": "C",
+        "mandatory": "M",
+        "label": "Min Module Temperature",
+        "desc": "Minimum temperature for all modules in the string."
+      },
+      {
+        "name": "ModTmpMinMod",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Min Module Temperature Module",
+        "desc": "Module with the minimum temperature."
+      },
+      {
+        "name": "ModTmpAvg",
+        "type": "int16",
+        "size": 1,
+        "sf": "ModTmp_SF",
+        "units": "C",
+        "mandatory": "M",
+        "label": "Average Module Temperature",
+        "desc": "Average temperature for all modules in the string."
+      },
+      {
+        "name": "Pad1",
+        "type": "pad",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Pad",
+        "desc": "Pad register."
+      },
+      {
+        "name": "ConSt",
+        "type": "bitfield32",
+        "size": 2,
+        "label": "Contactor Status",
+        "desc": "Status of the contactor(s) for the string.",
+        "symbols": [
+          {
+            "name": "CONTACTOR_0",
+            "value": 0
+          },
+          {
+            "name": "CONTACTOR_1",
+            "value": 1
+          },
+          {
+            "name": "CONTACTOR_2",
+            "value": 2
+          },
+          {
+            "name": "CONTACTOR_3",
+            "value": 3
+          },
+          {
+            "name": "CONTACTOR_4",
+            "value": 4
+          },
+          {
+            "name": "CONTACTOR_5",
+            "value": 5
+          },
+          {
+            "name": "CONTACTOR_6",
+            "value": 6
+          },
+          {
+            "name": "CONTACTOR_7",
+            "value": 7
+          },
+          {
+            "name": "CONTACTOR_8",
+            "value": 8
+          },
+          {
+            "name": "CONTACTOR_9",
+            "value": 9
+          },
+          {
+            "name": "CONTACTOR_10",
+            "value": 10
+          },
+          {
+            "name": "CONTACTOR_11",
+            "value": 11
+          },
+          {
+            "name": "CONTACTOR_12",
+            "value": 12
+          },
+          {
+            "name": "CONTACTOR_13",
+            "value": 13
+          },
+          {
+            "name": "CONTACTOR_14",
+            "value": 14
+          },
+          {
+            "name": "CONTACTOR_15",
+            "value": 15
+          },
+          {
+            "name": "CONTACTOR_16",
+            "value": 16
+          },
+          {
+            "name": "CONTACTOR_17",
+            "value": 17
+          },
+          {
+            "name": "CONTACTOR_18",
+            "value": 18
+          },
+          {
+            "name": "CONTACTOR_19",
+            "value": 19
+          },
+          {
+            "name": "CONTACTOR_20",
+            "value": 20
+          },
+          {
+            "name": "CONTACTOR_21",
+            "value": 21
+          },
+          {
+            "name": "CONTACTOR_22",
+            "value": 22
+          },
+          {
+            "name": "CONTACTOR_23",
+            "value": 23
+          },
+          {
+            "name": "CONTACTOR_24",
+            "value": 24
+          },
+          {
+            "name": "CONTACTOR_25",
+            "value": 25
+          },
+          {
+            "name": "CONTACTOR_26",
+            "value": 26
+          },
+          {
+            "name": "CONTACTOR_27",
+            "value": 27
+          },
+          {
+            "name": "CONTACTOR_28",
+            "value": 28
+          },
+          {
+            "name": "CONTACTOR_29",
+            "value": 29
+          },
+          {
+            "name": "CONTACTOR_30",
+            "value": 30
+          }
+        ]
+      },
+      {
+        "name": "Evt1",
+        "type": "bitfield32",
+        "size": 2,
+        "mandatory": "M",
+        "label": "String Event 1",
+        "desc": "Alarms, warnings and status values.  Bit flags.",
+        "symbols": [
+          {
+            "name": "COMMUNICATION_ERROR",
+            "value": 0
+          },
+          {
+            "name": "OVER_TEMP_ALARM",
+            "value": 1
+          },
+          {
+            "name": "OVER_TEMP_WARNING",
+            "value": 2
+          },
+          {
+            "name": "UNDER_TEMP_ALARM",
+            "value": 3
+          },
+          {
+            "name": "UNDER_TEMP_WARNING",
+            "value": 4
+          },
+          {
+            "name": "OVER_CHARGE_CURRENT_ALARM",
+            "value": 5
+          },
+          {
+            "name": "OVER_CHARGE_CURRENT_WARNING",
+            "value": 6
+          },
+          {
+            "name": "OVER_DISCHARGE_CURRENT_ALARM",
+            "value": 7
+          },
+          {
+            "name": "OVER_DISCHARGE_CURRENT_WARNING",
+            "value": 8
+          },
+          {
+            "name": "OVER_VOLT_ALARM",
+            "value": 9
+          },
+          {
+            "name": "OVER_VOLT_WARNING",
+            "value": 10
+          },
+          {
+            "name": "UNDER_VOLT_ALARM",
+            "value": 11
+          },
+          {
+            "name": "UNDER_VOLT_WARNING",
+            "value": 12
+          },
+          {
+            "name": "UNDER_SOC_MIN_ALARM",
+            "value": 13
+          },
+          {
+            "name": "UNDER_SOC_MIN_WARNING",
+            "value": 14
+          },
+          {
+            "name": "OVER_SOC_MAX_ALARM",
+            "value": 15
+          },
+          {
+            "name": "OVER_SOC_MAX_WARNING",
+            "value": 16
+          },
+          {
+            "name": "VOLTAGE_IMBALANCE_WARNING",
+            "value": 17
+          },
+          {
+            "name": "TEMPERATURE_IMBALANCE_ALARM",
+            "value": 18
+          },
+          {
+            "name": "TEMPERATURE_IMBALANCE_WARNING",
+            "value": 19
+          },
+          {
+            "name": "CONTACTOR_ERROR",
+            "value": 20
+          },
+          {
+            "name": "FAN_ERROR",
+            "value": 21
+          },
+          {
+            "name": "GROUND_FAULT",
+            "value": 22
+          },
+          {
+            "name": "OPEN_DOOR_ERROR",
+            "value": 23
+          },
+          {
+            "name": "RESERVED_1",
+            "value": 24
+          },
+          {
+            "name": "OTHER_ALARM",
+            "value": 25
+          },
+          {
+            "name": "OTHER_WARNING",
+            "value": 26
+          },
+          {
+            "name": "RESERVED_2",
+            "value": 27
+          },
+          {
+            "name": "CONFIGURATION_ALARM",
+            "value": 28
+          },
+          {
+            "name": "CONFIGURATION_WARNING",
+            "value": 29
+          }
+        ]
+      },
+      {
+        "name": "Evt2",
+        "type": "bitfield32",
+        "size": 2,
+        "label": "String Event 2",
+        "desc": "Alarms, warnings and status values.  Bit flags."
+      },
+      {
+        "name": "EvtVnd1",
+        "type": "bitfield32",
+        "size": 2,
+        "label": "Vendor Event Bitfield 1",
+        "desc": "Vendor defined events."
+      },
+      {
+        "name": "EvtVnd2",
+        "type": "bitfield32",
+        "size": 2,
+        "label": "Vendor Event Bitfield 2",
+        "desc": "Vendor defined events."
+      },
+      {
+        "name": "SetEna",
+        "type": "enum16",
+        "size": 1,
+        "access": "RW",
+        "label": "Enable/Disable String",
+        "desc": "Enables and disables the string.  Should reset to 0 upon completion.",
+        "symbols": [
+          {
+            "name": "DISABLED",
+            "value": 0
+          },
+          {
+            "name": "ENABLED",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "name": "SetCon",
+        "type": "enum16",
+        "size": 1,
+        "access": "RW",
+        "label": "Connect/Disconnect String",
+        "desc": "Connects and disconnects the string.",
+        "symbols": [
+          {
+            "name": "CONNECT_STRING",
+            "value": 1
+          },
+          {
+            "name": "DISCONNECT_STRING",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "name": "SoC_SF",
+        "type": "sunssf",
+        "size": 1,
+        "mandatory": "M",
+        "desc": "Scale factor for string state of charge."
+      },
+      {
+        "name": "SoH_SF",
+        "type": "sunssf",
+        "size": 1,
+        "desc": "Scale factor for string state of health."
+      },
+      {
+        "name": "DoD_SF",
+        "type": "sunssf",
+        "size": 1,
+        "desc": "Scale factor for string depth of discharge."
+      },
+      {
+        "name": "A_SF",
+        "type": "sunssf",
+        "size": 1,
+        "mandatory": "M",
+        "desc": "Scale factor for string current."
+      },
+      {
+        "name": "V_SF",
+        "type": "sunssf",
+        "size": 1,
+        "desc": "Scale factor for string voltage."
+      },
+      {
+        "name": "CellV_SF",
+        "type": "sunssf",
+        "size": 1,
+        "mandatory": "M",
+        "desc": "Scale factor for cell voltage."
+      },
+      {
+        "name": "ModTmp_SF",
+        "type": "sunssf",
+        "size": 1,
+        "mandatory": "M",
+        "desc": "Scale factor for module temperature."
+      },
+      {
+        "name": "Pad2",
+        "type": "pad",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Pad",
+        "desc": "Pad register."
+      },
+      {
+        "name": "Pad3",
+        "type": "pad",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Pad",
+        "desc": "Pad register."
+      },
+      {
+        "name": "Pad4",
+        "type": "pad",
+        "size": 1,
+        "mandatory": "M",
+        "label": "Pad",
+        "desc": "Pad register."
+      }
+    ],
+    "groups": [
+      {
+        "name": "lithium_ion_string_module",
+        "type": "group",
+        "count": 0,
+        "points": [
+          {
+            "name": "ModNCell",
+            "type": "uint16",
+            "size": 1,
+            "mandatory": "M",
+            "label": "Module Cell Count",
+            "desc": "Count of all cells in the module."
+          },
+          {
+            "name": "ModSoC",
+            "type": "uint16",
+            "size": 1,
+            "sf": "SoC_SF",
+            "units": "%",
+            "label": "Module SoC",
+            "desc": "Module state of charge, expressed as a percentage."
+          },
+          {
+            "name": "ModSoH",
+            "type": "uint16",
+            "size": 1,
+            "sf": "SoH_SF",
+            "units": "%",
+            "label": "Module SoH",
+            "desc": "Module state of health, expressed as a percentage."
+          },
+          {
+            "name": "ModCellVMax",
+            "type": "uint16",
+            "size": 1,
+            "sf": "CellV_SF",
+            "units": "V",
+            "mandatory": "M",
+            "label": "Max Cell Voltage",
+            "desc": "Maximum voltage for all cells in the module."
+          },
+          {
+            "name": "ModCellVMaxCell",
+            "type": "uint16",
+            "size": 1,
+            "label": "Max Cell Voltage Cell",
+            "desc": "Cell with maximum voltage."
+          },
+          {
+            "name": "ModCellVMin",
+            "type": "uint16",
+            "size": 1,
+            "sf": "CellV_SF",
+            "units": "V",
+            "mandatory": "M",
+            "label": "Min Cell Voltage",
+            "desc": "Minimum voltage for all cells in the module."
+          },
+          {
+            "name": "ModCellVMinCell",
+            "type": "uint16",
+            "size": 1,
+            "sf": "CellV_SF",
+            "units": "V",
+            "label": "Min Cell Voltage Cell",
+            "desc": "Cell with minimum voltage."
+          },
+          {
+            "name": "ModCellVAvg",
+            "type": "uint16",
+            "size": 1,
+            "sf": "CellV_SF",
+            "units": "V",
+            "mandatory": "M",
+            "label": "Average Cell Voltage",
+            "desc": "Average voltage for all cells in the module."
+          },
+          {
+            "name": "ModCellTmpMax",
+            "type": "int16",
+            "size": 1,
+            "sf": "ModTmp_SF",
+            "units": "C",
+            "mandatory": "M",
+            "label": "Max Cell Temperature",
+            "desc": "Maximum temperature for all cells in the module."
+          },
+          {
+            "name": "ModCellTmpMaxCell",
+            "type": "uint16",
+            "size": 1,
+            "label": "Max Cell Temperature Cell",
+            "desc": "Cell with maximum temperature."
+          },
+          {
+            "name": "ModCellTmpMin",
+            "type": "int16",
+            "size": 1,
+            "sf": "ModTmp_SF",
+            "units": "C",
+            "mandatory": "M",
+            "label": "Min Cell Temperature",
+            "desc": "Minimum temperature for all cells in the module."
+          },
+          {
+            "name": "ModCellTmpMinCell",
+            "type": "uint16",
+            "size": 1,
+            "label": "Min Cell Temperature Cell",
+            "desc": "Cell with minimum temperature."
+          },
+          {
+            "name": "ModCellTmpAvg",
+            "type": "int16",
+            "size": 1,
+            "sf": "ModTmp_SF",
+            "units": "C",
+            "mandatory": "M",
+            "label": "Average Cell Temperature",
+            "desc": "Average temperature for all cells in the module."
+          },
+          {
+            "name": "Pad5",
+            "type": "pad",
+            "size": 1,
+            "mandatory": "M",
+            "label": "Pad",
+            "desc": "Pad register."
+          },
+          {
+            "name": "Pad6",
+            "type": "pad",
+            "size": 1,
+            "mandatory": "M",
+            "label": "Pad",
+            "desc": "Pad register."
+          },
+          {
+            "name": "Pad7",
+            "type": "pad",
+            "size": 1,
+            "mandatory": "M",
+            "label": "Pad",
+            "desc": "Pad register."
+          }
+        ]
+      }
+    ]
+  },
+  "id": 804
+}

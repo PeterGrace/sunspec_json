@@ -1,0 +1,113 @@
+{
+  "group": {
+    "name": "dc_generator_status",
+    "type": "group",
+    "label": "DC-Coupled Generator Status",
+    "desc": "Communicates details about the current behavior of a DC-coupled generator connected to an ESS",
+    "points": [
+      {
+        "name": "ID",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "static": "S",
+        "label": "Model ID",
+        "desc": "Model identifier",
+        "value": 10020
+      },
+      {
+        "name": "L",
+        "type": "uint16",
+        "size": 1,
+        "mandatory": "M",
+        "static": "S",
+        "label": "Model Length",
+        "desc": "Model length"
+      },
+      {
+        "name": "Health",
+        "type": "enum16",
+        "size": 1,
+        "label": "Generator Health",
+        "desc": "Indicates presence of any faults (alarms or warnings) that impact the generator's ability to run",
+        "symbols": [
+          {
+            "name": "HEALTH_UNKNOWN",
+            "value": 0
+          },
+          {
+            "name": "ALARM",
+            "value": 1
+          },
+          {
+            "name": "WARNING",
+            "value": 2
+          },
+          {
+            "name": "READY",
+            "value": 3
+          }
+        ]
+      },
+      {
+        "name": "RunHours",
+        "type": "uint16",
+        "size": 1,
+        "sf": "Tenth_SF",
+        "units": "h",
+        "label": "Generator Lifetime Run Hours",
+        "desc": "A running total of the number of hours for which the generator has run"
+      },
+      {
+        "name": "Tenth_SF",
+        "type": "sunssf",
+        "size": 1
+      },
+      {
+        "name": "ActiveECode",
+        "type": "uint16",
+        "size": 1,
+        "label": "Active E-Code",
+        "desc": "Contains the E-Code value for any currently-active fault (alarm or warning) on generator.  If multiple faults are active, the E-Code for the highest-priority fault is reported."
+      },
+      {
+        "name": "EnergyIn",
+        "type": "uint32",
+        "size": 2,
+        "units": "Wh",
+        "label": "Energy In",
+        "desc": "Contains the lifetime total amount of energy consumed by the generator, in watt-hours."
+      },
+      {
+        "name": "EnergyOut",
+        "type": "uint32",
+        "size": 2,
+        "units": "Wh",
+        "label": "Energy Out",
+        "desc": "Contains the lifetime total amount of energy produced by the generator, in watt-hours."
+      },
+      {
+        "name": "AutoStartState",
+        "type": "enum16",
+        "size": 1,
+        "label": "Generator Start/Stop Mode",
+        "desc": "The generator is designed to start automatically most of the time.  This field reports if the generator is in auto mode or not.",
+        "symbols": [
+          {
+            "name": "AUTO_STATE_UNKNOWN",
+            "value": 0
+          },
+          {
+            "name": "IN_AUTO",
+            "value": 1
+          },
+          {
+            "name": "NOT_IN_AUTO",
+            "value": 2
+          }
+        ]
+      }
+    ]
+  },
+  "id": 10020
+}

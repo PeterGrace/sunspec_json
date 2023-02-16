@@ -1,0 +1,78 @@
+---
+poll_rate: 15 # Rate (time in seconds) at which to poll for data
+log_level: INFO
+sunspec:
+  models:
+    battery:
+      models: 
+        - common
+        - REbus_status
+        - battery
+        - battery_status
+        - lithium_ion_string
+        - DCB105_warranty
+    beacon:
+      models: 
+        - common
+    inverter:
+      models: 
+        - common
+        - inverter
+        - volt_var
+        - REbus_arb
+        - REbus_exp
+        - REbus_status
+    pvlink:
+      models: 
+        - common
+        - string_combiner
+        - REbus_status
+        - pvlink_status
+        - pvrss_config
+        - pvrss_telemetry
+    icm:
+      models:
+        - common
+  devices:
+    - name: inverter1
+      ip: 127.0.0.1
+      port: 5083
+      modbus:
+        - model: battery
+          link_ids: [5]
+        - model: beacon
+          link_ids: [6]
+        - model: icm
+          link_ids: [2]
+        - model: inverter
+          link_ids: [3]
+        - model: pvlink
+          link_ids: [7,8,9,10]
+    - name: inverter2
+      ip: 127.0.0.1
+      port: 5084
+      modbus:
+        - model: battery
+          link_ids: [4]
+        - model: beacon
+          link_ids: [1]
+        - model: icm
+          link_ids: [2]
+        - model: inverter
+          link_ids: [3]
+        - model: pvlink
+          link_ids: [5,6,7,8]
+    - name: inverter3
+      ip: 127.0.0.1
+      port: 5085
+      modbus:
+        - model: battery
+          link_ids: []
+        - model: beacon
+          link_ids: [1]
+        - model: icm
+          link_ids: [2]
+        - model: inverter
+          link_ids: [3]
+        - model: pvlink
+          link_ids: [5,6,7]
